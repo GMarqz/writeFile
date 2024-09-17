@@ -1,0 +1,67 @@
+[
+  {
+    "id": 89,
+    "name": "Mualani",
+    "talents": {
+      "normalAtk": 1,
+      "elementalSkill": 1,
+      "elementalBurst": 1,
+      "type": "Contention",
+      "weeklyBossMaterial": "Unknown"
+    },
+    "pic": "...",
+    "description": "Well, this is a test but my current Mualani looks exactly like this. Lv50/60 BTW."
+  },
+  {
+    "id": 89,
+    "name": "Mualani",
+    "talents": {
+      "normalAtk": 1,
+      "elementalSkill": 1,
+      "elementalBurst": 1,
+      "type": "Contention",
+      "weeklyBossMaterial": "Unknown"
+    },
+    "pic": "...",
+    "description": "Well, this is a test but my current Mualani looks exactly like this. Lv50/60 BTW."
+  },
+  {
+    "id": 89,
+    "name": "Mualani",
+    "talents": {
+      "normalAtk": 1,
+      "elementalSkill": 1,
+      "elementalBurst": 1,
+      "type": "Contention",
+      "weeklyBossMaterial": "Unknown"
+    },
+    "pic": "...",
+    "description": "Well, this is a test but my current Mualani looks exactly like this. Lv50/60 BTW."
+  },
+  {
+    "id": 31,
+    "name": "Kachina",
+    "talents": {
+      "normalAtk": 1,
+      "elementalSkill": 1,
+      "elementalBurst": 1,
+      "type": "Conflict",
+      "weeklyBossMaterial": "Fading Candle"
+    },
+    "pic": "path",
+    "description": "She's so funny! I wanna build her!"
+  },
+  {
+    "id": 140,
+    "name": "Yelan",
+    "talents": {
+      "normalAtk": 8,
+      "elementalSkill": 8,
+      "elementalBurst": 10,
+      "type": "Prosperity",
+      "weeklyBossMaterial": "Gilded Scara (Azhdaha)"
+    },
+    "pic": "path",
+    "description": "I want to at least increase her Elemental Burst level to 9. Good thing her burst is crowned already."
+  }
+]
