@@ -1,6 +1,6 @@
 [
   {
-    "id": 89,
+    "id": 4,
     "name": "Mualani",
     "talents": {
       "normalAtk": 1,
@@ -63,5 +63,18 @@
     },
     "pic": "path",
     "description": "I want to at least increase her Elemental Burst level to 9. Good thing her burst is crowned already."
+  },
+  {
+    "id": 380,
+    "name": "Yan Fei",
+    "talents": {
+      "normalAtk": 8,
+      "elementalSkill": 7,
+      "elementalBurst": 6,
+      "type": "Gold",
+      "weeklyBossMaterial": "Bloodjade Branch (Azhdaha)"
+    },
+    "pic": "path",
+    "description": "As I need another pyro DPS, I decided to build her although I know she won't be as strong as Yoimiya, at least I've got her c6 which makes her a little better and deserved. My plan is to crown her NA. Her final skills should looks like this: 10/9/9."
   }
 ]
