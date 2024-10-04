@@ -76,5 +76,18 @@
     },
     "pic": "path",
     "description": "As I need another pyro DPS, I decided to build her although I know she won't be as strong as Yoimiya, at least I've got her c6 which makes her a little better and deserved. My plan is to crown her NA. Her final skills should looks like this: 10/9/9."
+  },
+  {
+    "id": 978,
+    "name": "Test",
+    "talents": {
+      "normalAtk": 2,
+      "elementalSkill": 4,
+      "elementalBurst": 6,
+      "type": "Tipo",
+      "weeklyBossMaterial": "Boss"
+    },
+    "pic": "ali",
+    "description": "Testou"
   }
 ]

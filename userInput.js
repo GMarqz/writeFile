@@ -1,12 +1,12 @@
-const readline = require('node:readline');
+// const readline = require('node:readline');
 const addDataToJson = require('./index');
 
-const rl = readline.createInterface({
-    input: process.stdin,
-    output: process.stdout,
-});
+// const rl = readline.createInterface({
+//     input: process.stdin,
+//     output: process.stdout,
+// });
 
-function userInput() {
+function userInput(rl) {
 
 
     let id, name, normalAtk, elementalSkill, elementalBurst, talentType, weeklyBossMaterial, pic, description;
