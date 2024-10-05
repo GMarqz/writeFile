@@ -1,18 +1,12 @@
-// const readline = require('node:readline');
 const addDataToJson = require('./index');
+const idGenerator = require('./idGenerator');
 
-// const rl = readline.createInterface({
-//     input: process.stdin,
-//     output: process.stdout,
-// });
+const id = idGenerator.idGenerator();
 
 function userInput(rl) {
 
+    let name, normalAtk, elementalSkill, elementalBurst, talentType, weeklyBossMaterial, pic, description;
 
-    let id, name, normalAtk, elementalSkill, elementalBurst, talentType, weeklyBossMaterial, pic, description;
-
-    rl.question('Characters id: ', (answer) => {
-        id = answer;
         rl.question('Characters name: ', (answer) => {
             name = answer;
             rl.question(`${name}'s normal attack level: `, (answer) => {
@@ -30,21 +24,6 @@ function userInput(rl) {
                                     rl.question(`Add a description to ${name}'s profile: `, (answer) => {
                                         description = answer;
                                         let getData;
-                                        // console.log(`
-                                        //         {
-                                                        // "id": ${id}
-                                        //             "name": "${name}",
-                                        //             "talents": {
-                                        //                 "normalAtk": ${normalAtk},
-                                        //                 "elementalSkill": ${elementalSkill},
-                                        //                 "elementalBurst": ${elementalBurst},
-                                        //                 "type": "${talentType}",
-                                        //                 "weeklyBossMaterial": "${weeklyBossMaterial}"
-                                        //             },
-                                        //             "pic": "${pic}",
-                                        //             "description": "${description}"
-                                        //         }
-                                        //     `)
                                         getData = `
                                             {
                                                 "id": ${id},
@@ -71,21 +50,8 @@ function userInput(rl) {
                 })
             });
         });
-    });
 }
 
 module.exports = {
     userInput: userInput
 }
-
-// "id": 89,
-// "name": "Mualani",
-// "talents": {
-//   "normalAtk": 1,
-//   "elementalSkill": 1,
-//   "elementalBurst": 1,
-//   "type": "Contention",
-//   "weeklyBossMaterial": "Unknown"
-// },
-// "pic": "...",
-// "description": "Well, this is a test but my current Mualani looks exactly like this. Lv50/60 BTW."
