@@ -89,5 +89,70 @@
     },
     "pic": "ali",
     "description": "Testou"
+  },
+  {
+    "id": 602,
+    "name": "IsTest",
+    "talents": {
+      "normalAtk": 1,
+      "elementalSkill": 1,
+      "elementalBurst": 1,
+      "type": "tipo",
+      "weeklyBossMaterial": "boss"
+    },
+    "pic": "there",
+    "description": "this is a description (i swear)"
+  },
+  {
+    "id": "4,89,89,31,140,380,978,602,200",
+    "name": "WOOOOOOORK",
+    "talents": {
+      "normalAtk": 1,
+      "elementalSkill": 1,
+      "elementalBurst": 1,
+      "type": "TALENT",
+      "weeklyBossMaterial": "BOSS"
+    },
+    "pic": "PATH",
+    "description": "YOU HAVE ONLY ONE JOB JUST DO IT AAAAAAAA"
+  },
+  {
+    "id": "105",
+    "name": "ITS ABOUT TIME WE DO THIS",
+    "talents": {
+      "normalAtk": 1,
+      "elementalSkill": 1,
+      "elementalBurst": 1,
+      "type": "TALENT",
+      "weeklyBossMaterial": "BOSS"
+    },
+    "pic": "PATH",
+    "description": "and i'm about to give up honestly"
+  },
+  {
+    "id": 265,
+    "name": "Last Atempt",
+    "talents": {
+      "normalAtk": 1,
+      "elementalSkill": 1,
+      "elementalBurst": 1,
+      "type": "Talent",
+      "weeklyBossMaterial": "Boss"
+    },
+    "pic": "Path",
+    "description": "Last time I forgot to remove the quotes"
+  },
+  {
+    "id": 570,
+    "name": "Last Test",
+    "talents": {
+      "normalAtk": 1,
+      "elementalSkill": 1,
+      "elementalBurst": 1,
+      "type": "Talent",
+      "weeklyBossMaterial": "Boss"
+    },
+    "pic": "Path",
+    "description": "It seems 'existingId.push(random)' at else's block is pointless, so I'm trying to add a character without it."
   }
 ]
