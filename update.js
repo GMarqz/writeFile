@@ -1,22 +1,11 @@
-const readline = require('node:readline/promises');
-const characters = require('./characters.json');
-const addDataToJson = require('./index');
+async function askNewDataInfo(character, rl, addDataFunction) {
+    const oldLevelMessage = "(or current level in case nothing changed)";
+    const updatedNormalAtkLevel = await rl.question(`Enter the character's new Normal Attack Level ${oldLevelMessage}: `);
+    const updatedElementalSkillLevel = await rl.question(`Enter the character's new Elemental Skill Level ${oldLevelMessage}: `);
+    const updatedElementalBurstLevel = await rl.question(`Enter the character's new Elemental Burst Level ${oldLevelMessage}: `);
+    const updatedDescription = await rl.question(`Enter the character's new Description: `);
 
-const rl = readline.createInterface({
-  input: process.stdin,
-  output: process.stdout,
-});
-
-function updateCharacterData(character) {
-
-    async function askNewDataInfo() {
-        const oldLevelMessage = "(or old level in case nothing changed)";
-        const updatedNormalAtkLevel = await rl.question(`Enter the character's new Normal Attack Level ${oldLevelMessage}: `);
-        const updatedElementalSkillLevel = await rl.question(`Enter the character's new Elemental Skill Level ${oldLevelMessage}: `);
-        const updatedElementalBurstLevel = await rl.question(`Enter the character's new Elemental Burst Level ${oldLevelMessage}: `);
-        const updatedDescription = await rl.question(`Enter the character's new Description: `);
-
-        const updatedCharacter = `
+    const updatedCharacter = `
         {
             "id": ${character.id},
             "name": "${character.name}",
@@ -31,16 +20,14 @@ function updateCharacterData(character) {
             "description": "${updatedDescription}"
         }
     `
-        console.log(updatedCharacter);
-        const parsedcharacterUpdated = JSON.parse(updatedCharacter);
-        const returnUpdatedJson = addDataToJson.addDataToJson(parsedcharacterUpdated);
-        rl.close();
-        
-    }
-
-    askNewDataInfo();
+    console.log(updatedCharacter);
+    const parsedcharacterUpdated = JSON.parse(updatedCharacter);
+    const returnUpdatedJson = addDataFunction.addDataToJson(parsedcharacterUpdated);
+    rl.close();
 }
 
-updateCharacterData(characters[0]);
+// askNewDataInfo(characters[0]);
 
-//Now I've got to get user's input to decided which character is to update and delete its old data, keeping only the updated one.
+module.exports = {
+    askNewDataInfo: askNewDataInfo
+}
