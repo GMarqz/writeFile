@@ -1,55 +1,38 @@
-const addDataToJson = require('./index');
+const addDataToJson = require('./create');
 const idGenerator = require('./idGenerator');
 
 const id = idGenerator.idGenerator();
 
-function userInput(rl) {
+async function userInput(rl) {
 
-    let name, normalAtk, elementalSkill, elementalBurst, talentType, weeklyBossMaterial, pic, description;
+    const characterName = await rl.question('Characters name: ');
+    const characterNormalAtk = await rl.question(`${characterName}'s normal attack level: `);
+    const characterElementalSkill = await rl.question(`${characterName}'s elemental skill level: `);
+    const characterElementalBurst = await rl.question(`${characterName}'s elemental burst level: `);
+    const characterTalentType = await rl.question(`${characterName}'s talent type: `);
+    const characterWeeklyBossMaterial = await rl.question(`${characterName}'s weekly boss material: `);
+    const characterPic = await rl.question(`${characterName}'s pic is nested at: `);
+    const characterDescription = await rl.question(`Add a description to ${characterName}'s profile: `);
 
-        rl.question('Characters name: ', (answer) => {
-            name = answer;
-            rl.question(`${name}'s normal attack level: `, (answer) => {
-                normalAtk = answer;
-                rl.question(`${name}'s elemental skill level: `, (answer) => {
-                    elementalSkill = answer;
-                    rl.question(`${name}'s elemental burst level: `, (answer) => {
-                        elementalBurst = answer;
-                        rl.question(`${name}'s talent type: `, (answer) => {
-                            talentType = answer;
-                            rl.question(`${name}'s weekly boss material: `, (answer) => {
-                                weeklyBossMaterial = answer;
-                                rl.question(`${name}'s pic is nested at: `, (answer) => {
-                                    pic = answer;
-                                    rl.question(`Add a description to ${name}'s profile: `, (answer) => {
-                                        description = answer;
-                                        let getData;
-                                        getData = `
-                                            {
-                                                "id": ${id},
-                                                "name": "${name}",
-                                                "talents": {
-                                                    "normalAtk": ${normalAtk},
-                                                    "elementalSkill": ${elementalSkill},
-                                                    "elementalBurst": ${elementalBurst},
-                                                    "type": "${talentType}",
-                                                    "weeklyBossMaterial": "${weeklyBossMaterial}"
-                                                },
-                                                "pic": "${pic}",
-                                                "description": "${description}"
-                                            }
-                                        `
-                                        const parsedUserOutputData = JSON.parse(getData)
-                                        const returnJson = addDataToJson.addDataToJson(parsedUserOutputData);
-                                        rl.close();
-                                    })
-                                })
-                            })
-                        })
-                    })
-                })
-            });
-        });
+    let getData;
+    getData = `
+        {
+            "id": ${id},
+            "name": "${characterName}",
+            "talents": {
+                "normalAtk": ${characterNormalAtk},
+                "elementalSkill": ${characterElementalSkill},
+                "elementalBurst": ${characterElementalBurst},
+                "type": "${characterTalentType}",
+                "weeklyBossMaterial": "${characterWeeklyBossMaterial}"
+            },
+            "pic": "${characterPic}",
+            "description": "${characterDescription}"
+        }
+    `
+    const parsedUserOutputData = JSON.parse(getData)
+    const returnJson = addDataToJson.addDataToJson(parsedUserOutputData);
+    rl.close();
 }
 
 module.exports = {
