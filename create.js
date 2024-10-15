@@ -1,5 +1,4 @@
 const fs = require('fs');
-const userInput = require('./userInput');
 
 function clearJSON() {
     fs.writeFileSync('./characters.json', '', (err) => {
@@ -27,5 +26,6 @@ function addDataToJson(json) {
 }
 
 module.exports = {
-    addDataToJson: addDataToJson
+    addDataToJson: addDataToJson,
+    clearJSON: clearJSON
 }

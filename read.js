@@ -3,6 +3,7 @@ const fs = require('fs');
 function readAll(){
     const dataRead = fs.readFileSync('./characters.json', 'utf8');
     console.log(dataRead);
+    // return dataRead;
 }
 
 function readByName(data, value) {
@@ -35,5 +36,6 @@ async function read(rl, data) {
 
 module.exports = {
   read: read,
-  getCharacterName: getCharacterName
+  getCharacterName: getCharacterName,
+  readAll: readAll
 }

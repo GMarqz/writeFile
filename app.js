@@ -47,8 +47,9 @@ async function initApp() {
         console.log('Leaving...');
         rl.close();
     } else {
-        console.log('Sorry, this option is invalid, closing program...');
-        rl.close();
+        console.log('\n \nSorry, this option is invalid, restarting program.');
+        // rl.close();
+        initApp();
     }
 }
 
