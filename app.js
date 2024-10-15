@@ -5,6 +5,7 @@ const askNewDataInfo = require('./update');
 const characters = require('./characters.json');
 const addDataToJson = require('./create');
 const getCharacterName = require('./read');
+const { removeById } = require('./delete');
 
 const rl = readline.createInterface({
     input: process.stdin,
@@ -42,6 +43,8 @@ async function initApp() {
         askNewDataInfo.askNewDataInfo(toUpdateCharacter, rl, addDataToJson);
     } else if(mainMenu === '4') {
         console.log('Deleting...') ;
+        const toDeleteId = await rl.question("Please enter your character's id: ");
+        removeById(Number(toDeleteId));
         rl.close();
     } else if (mainMenu === '5') {
         console.log('Leaving...');
