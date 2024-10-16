@@ -40,7 +40,7 @@ async function initApp() {
     } else if(mainMenu === '3') {
         console.log('Updating...');
         const toUpdateCharacter = await getCharacterName.getCharacterName(rl, characters);
-        askNewDataInfo.askNewDataInfo(toUpdateCharacter, rl, addDataToJson);
+        askNewDataInfo.askNewDataInfo(toUpdateCharacter, rl);
     } else if(mainMenu === '4') {
         console.log('Deleting...') ;
         const toDeleteId = await rl.question("Please enter your character's id: ");
