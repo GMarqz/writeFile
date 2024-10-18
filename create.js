@@ -1,4 +1,5 @@
 const fs = require('fs');
+const {readAll} = require('./read');
 
 function clearJSON() {
     fs.writeFileSync('./characters.json', '', (err) => {
@@ -7,25 +8,22 @@ function clearJSON() {
     // Antes eu tava usando o writeFile() e funcionou da primeira vez, mas depois ele parou de 'apagar' o arquivo JSON. Troquei pra writeFileSync() e deu bom, me pergunto o porquê tho...
 }
 
-// clearJSON();
-
-const readData = fs.readFileSync('./characters.json', 'utf8');
-
-function addDataToJson(json) {
-
-    let existingData = [];
-    existingData = JSON.parse(readData)
-    existingData.push(json)
-
-    const updatedJson = JSON.stringify(existingData, null, 2)
-
-    fs.writeFileSync('./characters.json', updatedJson, (err) => {
+function write(toWrite) {
+    fs.writeFileSync('./characters.json', toWrite, (err) => {
         if (err) throw err;
-        console.log(newData)
-    })
+    });
+}
+
+function addDataToJson(userInputParsedData) {
+    existingData = readAll(false);
+    existingData.push(userInputParsedData);
+
+    const updatedJson = JSON.stringify(existingData, null, 2);
+    write(updatedJson);
 }
 
 module.exports = {
     addDataToJson: addDataToJson,
-    clearJSON: clearJSON
+    clearJSON: clearJSON,
+    write: write
 }
