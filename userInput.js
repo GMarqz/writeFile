@@ -30,6 +30,7 @@ async function userInput(rl) {
             "description": "${characterDescription}"
         }
     `
+    console.log(`\n\nCheck the character you just added to database: \n${getData}`)
     const parsedUserOutputData = JSON.parse(getData)
     const returnJson = addDataToJson.addDataToJson(parsedUserOutputData);
     rl.close();
