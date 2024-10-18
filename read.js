@@ -1,9 +1,16 @@
 const fs = require('fs');
 
-function readAll(){
+function readAll(consoleLogOrNot){
     const dataRead = fs.readFileSync('./characters.json', 'utf8');
-    console.log(dataRead);
-    // return dataRead;
+    const readDataParsed = JSON.parse(dataRead);
+    const readDataParsedArray = [...readDataParsed];
+    if(consoleLogOrNot === true) {
+      console.log(readDataParsedArray);
+    } else if(consoleLogOrNot === false) {
+      return readDataParsedArray;
+    } else {
+      console.log(`[ERROR] \nWhen calling 'readAll()' function, your parameter should be either true or false. \nYou got this error because you either forgot to inform your parameter or you entered an invalid parameter.`);
+    }
 }
 
 function readByName(data, value) {
@@ -11,11 +18,9 @@ function readByName(data, value) {
 }
 
 async function getCharacterName(rl, data) {
-
   const provideCharacterName = await rl.question(`Enter the characters name: `);
   const characterFound = readByName(data, provideCharacterName);
   console.log(characterFound);
-  // rl.close();
   return characterFound;
 }
 
@@ -24,7 +29,7 @@ async function read(rl, data) {
   const chooseReadOption = await rl.question(`Choose an option below: \n[1] - See all characters data \n[2] - See character data by name \n`);
 
   if (chooseReadOption === '1') {
-    readAll()
+    readAll(true)
     rl.close();
   } else if (chooseReadOption === '2') {
     await getCharacterName(rl, data)
