@@ -13,7 +13,6 @@ function removeById(id) {
         const indexOfGivenId = charactersId.indexOf(id);
         readArray.splice(indexOfGivenId, 1);
         console.log(`${id} posicionado no index >${indexOfGivenId}< foi removido com sucesso!`);
-        console.log(readArray);
         clearJSON();
         const returnArrayAsJson = JSON.stringify([...readArray], null, 2);
         write(returnArrayAsJson);
