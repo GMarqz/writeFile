@@ -1,10 +1,8 @@
 const readline = require('node:readline/promises');
-const read = require('./read');
+const characters = require('./characters.json');
+const { read, getCharacterName } = require('./read');
 const userInput = require('./userInput');
 const askNewDataInfo = require('./update');
-const characters = require('./characters.json');
-const addDataToJson = require('./create');
-const getCharacterName = require('./read');
 const { removeById } = require('./delete');
 
 const rl = readline.createInterface({
@@ -35,11 +33,12 @@ async function initApp() {
         const firstOption = userInput.userInput(rl);
     } else if (mainMenu === '2') {
         console.log('Reading...');
-        await read.read(rl, characters);
-        rl.close();
+        await read(rl, characters);
+        // rl.close();
+        initApp();
     } else if(mainMenu === '3') {
         console.log('Updating...');
-        const toUpdateCharacter = await getCharacterName.getCharacterName(rl, characters);
+        const toUpdateCharacter = await getCharacterName(rl, characters);
         askNewDataInfo.askNewDataInfo(toUpdateCharacter, rl);
     } else if(mainMenu === '4') {
         console.log('Deleting...') ;
@@ -51,7 +50,6 @@ async function initApp() {
         rl.close();
     } else {
         console.log('\n \nSorry, this option is invalid, restarting program.');
-        // rl.close();
         initApp();
     }
 }
