@@ -1,10 +1,8 @@
 const addDataToJson = require('./create');
 const idGenerator = require('./idGenerator');
 
-const id = idGenerator.idGenerator();
-
 async function userInput(rl) {
-
+    const id = idGenerator.idGenerator();
     const characterName = await rl.question('Characters name: ');
     const characterNormalAtk = await rl.question(`${characterName}'s normal attack level: `);
     const characterElementalSkill = await rl.question(`${characterName}'s elemental skill level: `);
