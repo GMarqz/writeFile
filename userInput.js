@@ -1,9 +1,26 @@
 const addDataToJson = require('./create');
-const idGenerator = require('./idGenerator');
+const { readAll: readAll } = require('./read');
+const { v4: uuidv4 } = require('uuid');
+
+async function createNameIfItDoesntExist(rl) {
+    const readArray = readAll(false);
+    const checkCharacterName = await rl.question('Characters name: ');
+
+    let charactersName = [];
+    for(let i = 0; i < readArray.length; i++) {
+        charactersName.push(readArray[i].name);
+    }
+    if(charactersName.includes(checkCharacterName)) {
+        console.log("This character is already added to our database, please add another one or update the existing one.");
+        userInput(rl);
+    } else {
+        return checkCharacterName;
+    }
+}
 
 async function userInput(rl) {
-    const id = idGenerator.idGenerator();
-    const characterName = await rl.question('Characters name: ');
+    const id = uuidv4();
+    const characterName = await createNameIfItDoesntExist(rl);
     const characterNormalAtk = await rl.question(`${characterName}'s normal attack level: `);
     const characterElementalSkill = await rl.question(`${characterName}'s elemental skill level: `);
     const characterElementalBurst = await rl.question(`${characterName}'s elemental burst level: `);
@@ -15,7 +32,7 @@ async function userInput(rl) {
     let getData;
     getData = `
         {
-            "id": ${id},
+            "id": "${id}",
             "name": "${characterName}",
             "talents": {
                 "normalAtk": ${characterNormalAtk},
