@@ -1,18 +1,20 @@
 const { clearJSON, write } = require('./create');
 const { readAll } = require('./read');
 
-function removeById(id) {
+function removeByName(characterName) {
     const readArray = readAll(false);
 
-    let charactersId = [];
+    let charactersName = [];
     for(let i = 0; i < readArray.length; i++) {
-        charactersId.push(readArray[i].id);
+        charactersName.push(readArray[i].name);
     }
     
-    if(charactersId.includes(id)) {
-        const indexOfGivenId = charactersId.indexOf(id);
-        readArray.splice(indexOfGivenId, 1);
-        console.log(`${id} posicionado no index >${indexOfGivenId}< foi removido com sucesso!`);
+    // Dont forget to add a function asking if the user is sure about deleting the character, later.
+
+    if(charactersName.includes(characterName)) {
+        const indexOfGivenName = charactersName.indexOf(characterName);
+        readArray.splice(indexOfGivenName, 1);
+        console.log(`${characterName} posicionado no index >${indexOfGivenName}< foi removido com sucesso!`);
         clearJSON();
         const returnArrayAsJson = JSON.stringify([...readArray], null, 2);
         write(returnArrayAsJson);
@@ -22,5 +24,5 @@ function removeById(id) {
 } 
 
 module.exports = {
-    removeById: removeById
+    removeByName: removeByName
 }
