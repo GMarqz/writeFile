@@ -1,5 +1,6 @@
 const fs = require('fs');
 const { returnAllCharactersWithThisTalentType } = require('./talentType');
+const { predictNecessaryMaterials } = require('./talentLevel');
 
 function readAll(consoleLogOrNot){
     const dataRead = fs.readFileSync('./characters.json', 'utf8');
@@ -30,10 +31,11 @@ async function read(rl, data) {
   const chooseReadOption = await rl.question(`Choose an option below: \n[1] - See all characters data \n[2] - See character data by name \n[3] - See characters by talent type \n`);
 
   if (chooseReadOption === '1') {
-    readAll(true)
-    rl.close();
+    readAll(true);
+    // rl.close();
   } else if (chooseReadOption === '2') {
-    await getCharacterName(rl, data)
+    const chosenCharacter = await getCharacterName(rl, data);
+    predictNecessaryMaterials(chosenCharacter);
   } else if (chooseReadOption === '3') {
     const charactersData = readAll(false);
     await returnAllCharactersWithThisTalentType(rl, charactersData);
