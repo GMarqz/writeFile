@@ -3,7 +3,7 @@ const characters = require('./characters.json');
 const { read, getCharacterName } = require('./read');
 const userInput = require('./userInput');
 const askNewDataInfo = require('./update');
-const { removeById } = require('./delete');
+const { removeByName } = require('./delete');
 
 const rl = readline.createInterface({
     input: process.stdin,
@@ -42,8 +42,8 @@ async function initApp() {
         askNewDataInfo.askNewDataInfo(toUpdateCharacter, rl);
     } else if(mainMenu === '4') {
         console.log('Deleting...') ;
-        const toDeleteId = await rl.question("Please enter your character's id: ");
-        removeById(Number(toDeleteId));
+        const toDeleteName = await rl.question("Please enter your character's name: ");
+        removeByName(toDeleteName);
         rl.close();
     } else if (mainMenu === '5') {
         console.log('Leaving...');
