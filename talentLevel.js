@@ -1,20 +1,35 @@
-const { readAll } = require('./read');
+const levels = [
+    0,
+    3,
+    2,
+    4,
+    6,
+    9,
+    4,
+    6,
+    12,
+    16
+]
 
-const charactersData = readAll(false);
-const testCharacter = charactersData[18];
-console.log(testCharacter);
-const levels = {
-    0: 0,
-    1: 3,
-    2: 2,
-    3: 4,
-    4: 6,
-    5: 9,
-    6: 4,
-    7: 6,
-    8: 12,
-    9: 16
+function calcTalentMaterialsForSpecificLevel(currentLevel, specificLevel) {
+
+    let clevel = levels[currentLevel];
+    const slevel = levels[specificLevel];
+    // let nextClevelIndex;
+    let result = 0;
+    // while(clevel <= slevel) {
+    //     nextClevelIndex = currentLevel + 1;
+    //     clevel = clevel + levels[nextClevelIndex];
+    //     nextClevelIndex++;
+    //     clevel++;
+    // }
+    console.log(`You need ${clevel} materials to get to your desired level.`);
+    console.log(levels[9]);
+    // console.log(slevel);
 }
+
+calcTalentMaterialsForSpecificLevel(6, 9);
+// console.log(levels[6] + 1)
 
 function identifyRarity(talentLevel) {
     if(talentLevel === 1) {
@@ -29,9 +44,6 @@ function identifyRarity(talentLevel) {
 }
 
 function identifyLevel(normalAtkParamms, elementalSkillParamms, elementalBurstParamms, talentTypeParamms) {
-    // const normalAtk = normalAtkParamms;
-    // const elementalSkill = elementalSkillParamms;
-    // const elementalBurst = elementalBurstParamms;
     const normalAtkLevelIndex = levels[normalAtkParamms];
     const elementalSkillIndex = levels[elementalSkillParamms];
     const elementalBurstIndex = levels[elementalBurstParamms];
@@ -54,12 +66,11 @@ function predictNecessaryMaterials(character) {
     let elementalSkillLevel = character.talents.elementalSkill;
     let elementalBurstLevel = character.talents.elementalBurst;
     let characterTalentType = character.talents.type;
-    // const charactersData = readAll(false);
 
-    // console.log(charactersData[0].talents.normalAtk)
     identifyLevel(normalAtkLevel, elementalSkillLevel, elementalBurstLevel, characterTalentType);
 
 }
 
-predictNecessaryMaterials(testCharacter);
-
+module.exports = {
+    predictNecessaryMaterials: predictNecessaryMaterials
+}
