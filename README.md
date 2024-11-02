@@ -7,3 +7,6 @@ Users should be able to:
   - Update information about the characters
   - Delete characters
   - List characters by talent type
+  - Predict the amount of materials to upgrade character's talent level
+
+Working clean!
