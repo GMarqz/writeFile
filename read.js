@@ -1,5 +1,7 @@
-const fs = require('fs');
-const { returnAllCharactersWithThisTalentType } = require('./talentType');
+// const fs = require('fs');
+import fs from 'fs/promises';
+import { select, Separator } from '@inquirer/prompts';
+// const { returnAllCharactersWithThisTalentType } = require('./talentType');
 
 function readAll(consoleLogOrNot){
     const dataRead = fs.readFileSync('./characters.json', 'utf8');
@@ -25,26 +27,30 @@ async function getCharacterName(rl, data) {
   return characterFound;
 }
 
-async function read(rl, data) {
+// async function read(rl, data) {
 
-  const chooseReadOption = await rl.question(`Choose an option below: \n[1] - See all characters data \n[2] - See character data by name \n[3] - See characters by talent type \n`);
+//   const chooseReadOption = await rl.question(`Choose an option below: \n[1] - See all characters data \n[2] - See character data by name \n[3] - See characters by talent type \n`);
 
-  if (chooseReadOption === '1') {
-    readAll(true)
-    rl.close();
-  } else if (chooseReadOption === '2') {
-    await getCharacterName(rl, data)
-  } else if (chooseReadOption === '3') {
-    const charactersData = readAll(false);
-    await returnAllCharactersWithThisTalentType(rl, charactersData);
-  } else {
-    console.log('Invalid option. Please type an option between 1 and 3')
-    rl.close();
-  }
+//   if (chooseReadOption === '1') {
+//     readAll(true)
+//     rl.close();
+//   } else if (chooseReadOption === '2') {
+//     await getCharacterName(rl, data)
+//   } else if (chooseReadOption === '3') {
+//     const charactersData = readAll(false);
+//     await returnAllCharactersWithThisTalentType(rl, charactersData);
+//   } else {
+//     console.log('Invalid option. Please type an option between 1 and 3')
+//     rl.close();
+//   }
+// }
+
+export async function read(data) {
+
 }
 
-module.exports = {
-  read: read,
-  getCharacterName: getCharacterName,
-  readAll: readAll
-}
+// module.exports = {
+//   read: read,
+//   getCharacterName: getCharacterName,
+//   readAll: readAll
+// }
