@@ -1,9 +1,11 @@
 // const fs = require('fs');
-import fs from 'fs/promises';
-import { select, Separator } from '@inquirer/prompts';
+import fs from 'node:fs';
+import { select, Separator, input } from '@inquirer/prompts';
+// import { readFile } from 'fs/promises';
+// const characters = JSON.parse(await readFile('./characters.json', 'utf8'));
 // const { returnAllCharactersWithThisTalentType } = require('./talentType');
 
-function readAll(consoleLogOrNot){
+function readAll(consoleLogOrNot){  
     const dataRead = fs.readFileSync('./characters.json', 'utf8');
     const readDataParsed = JSON.parse(dataRead);
     const readDataParsedArray = [...readDataParsed];
@@ -20,8 +22,8 @@ function readByName(data, value) {
     return data.find((character) => character['name'] === value);
 }
 
-async function getCharacterName(rl, data) {
-  const provideCharacterName = await rl.question(`Enter the characters name: `);
+async function getCharacterName(data) {
+  const provideCharacterName = await input({ message: 'Enter the characters name: '});
   const characterFound = readByName(data, provideCharacterName);
   console.log(characterFound);
   return characterFound;
@@ -45,10 +47,37 @@ async function getCharacterName(rl, data) {
 //   }
 // }
 
-export async function read(data) {
-
+export async function read() {
+  const answer = await select({
+    message: 'Select a package manager',
+    choices: [
+      // {
+      //   name: 'npm',
+      //   value: 'npm',
+      //   description: 'npm is the most popular package manager',
+      // },
+      // {
+      //   name: 'yarn',
+      //   value: 'yarn',
+      //   description: 'yarn is an awesome package manager',
+      // },
+      new Separator(),
+      readAll(true)
+    //   {
+    //     name: 'jspm',
+    //     value: 'jspm',
+    //     disabled: true,
+    //   },
+    //   {
+    //     name: 'pnpm',
+    //     value: 'pnpm',
+    //     disabled: '(pnpm is not available)',
+    //   },
+    ],
+  });
 }
 
+read();
 // module.exports = {
 //   read: read,
 //   getCharacterName: getCharacterName,
