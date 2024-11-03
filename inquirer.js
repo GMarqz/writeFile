@@ -1,4 +1,5 @@
 import { select, Separator } from '@inquirer/prompts';
+import read from './read';
 // Or
 // import select, { Separator } from '@inquirer/select';
 
