@@ -1,12 +1,13 @@
-const { clearJSON, write } = require('./create');
-const {readAll} = require('./read');
+import * as createFunctions from './create.js';
+import * as readFuntions from './read.js';
+import { input } from '@inquirer/prompts';
 
-async function askNewDataInfo(character, rl) {
+export default async function askNewDataInfo(character) {
     const oldLevelMessage = "(or current level in case nothing changed)";
-    const updatedNormalAtkLevel = await rl.question(`Enter the character's new Normal Attack Level ${oldLevelMessage}: `);
-    const updatedElementalSkillLevel = await rl.question(`Enter the character's new Elemental Skill Level ${oldLevelMessage}: `);
-    const updatedElementalBurstLevel = await rl.question(`Enter the character's new Elemental Burst Level ${oldLevelMessage}: `);
-    const updatedDescription = await rl.question(`Enter the character's new Description: `);
+    const updatedNormalAtkLevel = await input({ message: `Enter the character's new Normal Attack Level ${oldLevelMessage}: `});
+    const updatedElementalSkillLevel = await input({ message: `Enter the character's new Elemental Skill Level ${oldLevelMessage}: `});
+    const updatedElementalBurstLevel = await input({ message: `Enter the character's new Elemental Burst Level ${oldLevelMessage}: `});
+    const updatedDescription = await input({ message: `Enter the character's new Description: `});
 
     const updatedCharacter = `
         {
@@ -26,7 +27,7 @@ async function askNewDataInfo(character, rl) {
     console.log(`\n\nCheck your updated data: \n${updatedCharacter}`);
     const updatedCharacterParsed = JSON.parse(updatedCharacter);
     const characterToUpdateId = character.id;
-    const readJsonDataParsedInsideAnArray = readAll(false);
+    const readJsonDataParsedInsideAnArray = readFuntions.readAll(false);
 
     let jsonCharactersId = [];
     for(let i = 0; i < readJsonDataParsedInsideAnArray.length; i++) {
@@ -35,15 +36,10 @@ async function askNewDataInfo(character, rl) {
     if(jsonCharactersId.includes(characterToUpdateId)) {
         const indexOfGivenId = jsonCharactersId.indexOf(characterToUpdateId);
         readJsonDataParsedInsideAnArray.splice(indexOfGivenId, 1, updatedCharacterParsed);
-        clearJSON();
+        createFunctions.clearJSON();
         const sendArrayBackAsJson = JSON.stringify([...readJsonDataParsedInsideAnArray], null, 2);
-        write(sendArrayBackAsJson);
+        createFunctions.write(sendArrayBackAsJson);
     } else {
         console.log("Unexpected error.")
     }
-    rl.close();
-}
-
-module.exports = {
-    askNewDataInfo: askNewDataInfo
 }
