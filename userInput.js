@@ -1,10 +1,11 @@
-const addDataToJson = require('./create');
-const { readAll: readAll } = require('./read');
-const { v4: uuidv4 } = require('uuid');
+import * as createFuntions from './create.js';
+import * as readFunctions from './read.js';
+import { input } from '@inquirer/prompts';
+import { v4 as uuidv4 } from 'uuid';
 
-async function createNameIfItDoesntExist(rl) {
-    const readArray = readAll(false);
-    const checkCharacterName = await rl.question('Characters name: ');
+async function createNameIfItDoesntExist() {
+    const readArray = readFunctions.readAll(false);
+    const checkCharacterName = await input({ message: 'Characters name: '});
 
     let charactersName = [];
     for(let i = 0; i < readArray.length; i++) {
@@ -12,22 +13,22 @@ async function createNameIfItDoesntExist(rl) {
     }
     if(charactersName.includes(checkCharacterName)) {
         console.log("This character is already added to our database, please add another one or update the existing one.");
-        userInput(rl);
+        userInput();
     } else {
         return checkCharacterName;
     }
 }
 
-async function userInput(rl) {
+export default async function userInput() {
     const id = uuidv4();
-    const characterName = await createNameIfItDoesntExist(rl);
-    const characterNormalAtk = await rl.question(`${characterName}'s normal attack level: `);
-    const characterElementalSkill = await rl.question(`${characterName}'s elemental skill level: `);
-    const characterElementalBurst = await rl.question(`${characterName}'s elemental burst level: `);
-    const characterTalentType = await rl.question(`${characterName}'s talent type: `);
-    const characterWeeklyBossMaterial = await rl.question(`${characterName}'s weekly boss material: `);
-    const characterPic = await rl.question(`${characterName}'s pic is nested at: `);
-    const characterDescription = await rl.question(`Add a description to ${characterName}'s profile: `);
+    const characterName = await createNameIfItDoesntExist();
+    const characterNormalAtk = await input({ message: `${characterName}'s normal attack level: `});
+    const characterElementalSkill = await input({ message: `${characterName}'s elemental skill level: `});
+    const characterElementalBurst = await input({ message: `${characterName}'s elemental burst level: `});
+    const characterTalentType = await input({ message: `${characterName}'s talent type: `});
+    const characterWeeklyBossMaterial = await input({ message: `${characterName}'s weekly boss material: `});
+    const characterPic = await input({ message: `${characterName}'s pic is nested at: `});
+    const characterDescription = await input({ message: `Add a description to ${characterName}'s profile: `});
 
     let getData;
     getData = `
@@ -47,10 +48,5 @@ async function userInput(rl) {
     `
     console.log(`\n\nCheck the character you just added to database: \n${getData}`)
     const parsedUserOutputData = JSON.parse(getData)
-    const returnJson = addDataToJson.addDataToJson(parsedUserOutputData);
-    rl.close();
-}
-
-module.exports = {
-    userInput: userInput
+    const returnJson = createFuntions.addDataToJson(parsedUserOutputData);
 }
