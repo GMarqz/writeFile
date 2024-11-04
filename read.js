@@ -1,7 +1,8 @@
-const fs = require('fs');
-const { returnAllCharactersWithThisTalentType } = require('./talentType');
+import fs from 'node:fs';
+import { select, Separator, input } from '@inquirer/prompts';
+import returnAllCharactersWithThisTalentType from './talentType.js';
 
-function readAll(consoleLogOrNot){
+function readAll(consoleLogOrNot){  
     const dataRead = fs.readFileSync('./characters.json', 'utf8');
     const readDataParsed = JSON.parse(dataRead);
     const readDataParsedArray = [...readDataParsed];
@@ -18,33 +19,52 @@ function readByName(data, value) {
     return data.find((character) => character['name'] === value);
 }
 
-async function getCharacterName(rl, data) {
-  const provideCharacterName = await rl.question(`Enter the characters name: `);
+async function getCharacterName(data) {
+  const provideCharacterName = await input({ message: 'Enter the characters name: '});
   const characterFound = readByName(data, provideCharacterName);
   console.log(characterFound);
   return characterFound;
 }
 
-async function read(rl, data) {
+async function read() {
+  const chooseReadOption = await select({
+    message: 'Select a package manager',
+    choices: [
+      {
+        name: 'Check all characters data',
+        value: 'first',
+        description: 'Check all characters data',
+      },
+      {
+        name: 'Check character by name',
+        value: 'second',
+        description: 'Check character by name',
+      },
+  
+      {
+        name: 'Check characters by talent type',
+        value: 'third',
+        description: 'Check characters by talent type',
+      },
+      new Separator(),
+      {
+        name: 'fourth',
+        value: 'fourth',
+        disabled: 'Check characters by weekly boos material (coming soon)',
+      },
+    ],
+  });
 
-  const chooseReadOption = await rl.question(`Choose an option below: \n[1] - See all characters data \n[2] - See character data by name \n[3] - See characters by talent type \n`);
-
-  if (chooseReadOption === '1') {
+  if (chooseReadOption === 'first') {
     readAll(true)
-    rl.close();
-  } else if (chooseReadOption === '2') {
-    await getCharacterName(rl, data)
-  } else if (chooseReadOption === '3') {
-    const charactersData = readAll(false);
-    await returnAllCharactersWithThisTalentType(rl, charactersData);
+  } else if (chooseReadOption === 'second') {
+    await getCharacterName(readAll(false));
+  } else if (chooseReadOption === 'third') {
+    // const charactersData = readAll(false);
+    await returnAllCharactersWithThisTalentType(input, readAll(false));
   } else {
     console.log('Invalid option. Please type an option between 1 and 3')
-    rl.close();
   }
 }
 
-module.exports = {
-  read: read,
-  getCharacterName: getCharacterName,
-  readAll: readAll
-}
+export { readAll, read, getCharacterName };
