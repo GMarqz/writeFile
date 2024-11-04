@@ -1,5 +1,5 @@
-const fs = require('fs');
-const {readAll} = require('./read');
+import fs from 'node:fs';
+import * as readFunctions from './read.js';
 
 function clearJSON() {
     fs.writeFileSync('./characters.json', '', (err) => {
@@ -15,15 +15,11 @@ function write(toWrite) {
 }
 
 function addDataToJson(userInputParsedData) {
-    existingData = readAll(false);
+    const existingData = readFunctions.readAll(false);
     existingData.push(userInputParsedData);
 
     const updatedJson = JSON.stringify(existingData, null, 2);
     write(updatedJson);
 }
 
-module.exports = {
-    addDataToJson: addDataToJson,
-    clearJSON: clearJSON,
-    write: write
-}
+export { addDataToJson, clearJSON, write };
