@@ -1,9 +1,6 @@
-// const fs = require('fs');
 import fs from 'node:fs';
 import { select, Separator, input } from '@inquirer/prompts';
-// import { readFile } from 'fs/promises';
-// const characters = JSON.parse(await readFile('./characters.json', 'utf8'));
-// const { returnAllCharactersWithThisTalentType } = require('./talentType');
+import returnAllCharactersWithThisTalentType from './talentType.js';
 
 function readAll(consoleLogOrNot){  
     const dataRead = fs.readFileSync('./characters.json', 'utf8');
@@ -29,57 +26,45 @@ async function getCharacterName(data) {
   return characterFound;
 }
 
-// async function read(rl, data) {
-
-//   const chooseReadOption = await rl.question(`Choose an option below: \n[1] - See all characters data \n[2] - See character data by name \n[3] - See characters by talent type \n`);
-
-//   if (chooseReadOption === '1') {
-//     readAll(true)
-//     rl.close();
-//   } else if (chooseReadOption === '2') {
-//     await getCharacterName(rl, data)
-//   } else if (chooseReadOption === '3') {
-//     const charactersData = readAll(false);
-//     await returnAllCharactersWithThisTalentType(rl, charactersData);
-//   } else {
-//     console.log('Invalid option. Please type an option between 1 and 3')
-//     rl.close();
-//   }
-// }
-
-export async function read() {
-  const answer = await select({
+async function read() {
+  const chooseReadOption = await select({
     message: 'Select a package manager',
     choices: [
-      // {
-      //   name: 'npm',
-      //   value: 'npm',
-      //   description: 'npm is the most popular package manager',
-      // },
-      // {
-      //   name: 'yarn',
-      //   value: 'yarn',
-      //   description: 'yarn is an awesome package manager',
-      // },
+      {
+        name: 'Check all characters data',
+        value: 'first',
+        description: 'Check all characters data',
+      },
+      {
+        name: 'Check character by name',
+        value: 'second',
+        description: 'Check character by name',
+      },
+  
+      {
+        name: 'Check characters by talent type',
+        value: 'third',
+        description: 'Check characters by talent type',
+      },
       new Separator(),
-      readAll(true)
-    //   {
-    //     name: 'jspm',
-    //     value: 'jspm',
-    //     disabled: true,
-    //   },
-    //   {
-    //     name: 'pnpm',
-    //     value: 'pnpm',
-    //     disabled: '(pnpm is not available)',
-    //   },
+      {
+        name: 'fourth',
+        value: 'fourth',
+        disabled: 'Check characters by weekly boos material (coming soon)',
+      },
     ],
   });
+
+  if (chooseReadOption === 'first') {
+    readAll(true)
+  } else if (chooseReadOption === 'second') {
+    await getCharacterName(readAll(false));
+  } else if (chooseReadOption === 'third') {
+    // const charactersData = readAll(false);
+    await returnAllCharactersWithThisTalentType(input, readAll(false));
+  } else {
+    console.log('Invalid option. Please type an option between 1 and 3')
+  }
 }
 
-read();
-// module.exports = {
-//   read: read,
-//   getCharacterName: getCharacterName,
-//   readAll: readAll
-// }
+export { readAll, read, getCharacterName };
