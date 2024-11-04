@@ -1,8 +1,8 @@
-const { clearJSON, write } = require('./create');
-const { readAll } = require('./read');
+import * as createFuntions from './create.js';
+import * as readFunctions from './read.js';
 
-function removeByName(characterName) {
-    const readArray = readAll(false);
+export default function removeByName(characterName) {
+    const readArray = readFunctions.readAll(false);
 
     let charactersName = [];
     for(let i = 0; i < readArray.length; i++) {
@@ -15,14 +15,10 @@ function removeByName(characterName) {
         const indexOfGivenName = charactersName.indexOf(characterName);
         readArray.splice(indexOfGivenName, 1);
         console.log(`${characterName} posicionado no index >${indexOfGivenName}< foi removido com sucesso!`);
-        clearJSON();
+        createFuntions.clearJSON();
         const returnArrayAsJson = JSON.stringify([...readArray], null, 2);
-        write(returnArrayAsJson);
+        createFuntions.write(returnArrayAsJson);
     } else {
         console.log("Unexpected error.")
     }
 } 
-
-module.exports = {
-    removeByName: removeByName
-}
