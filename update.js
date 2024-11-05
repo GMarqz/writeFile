@@ -1,5 +1,5 @@
-import * as createFunctions from './create.js';
-import * as readFuntions from './read.js';
+import { clearJSON, write } from './create.js';
+import { readAll } from './read.js';
 import { input } from '@inquirer/prompts';
 
 export default async function askNewDataInfo(character) {
@@ -27,7 +27,7 @@ export default async function askNewDataInfo(character) {
     console.log(`\n\nCheck your updated data: \n${updatedCharacter}`);
     const updatedCharacterParsed = JSON.parse(updatedCharacter);
     const characterToUpdateId = character.id;
-    const readJsonDataParsedInsideAnArray = readFuntions.readAll(false);
+    const readJsonDataParsedInsideAnArray = readAll(false);
 
     let jsonCharactersId = [];
     for(let i = 0; i < readJsonDataParsedInsideAnArray.length; i++) {
@@ -36,9 +36,9 @@ export default async function askNewDataInfo(character) {
     if(jsonCharactersId.includes(characterToUpdateId)) {
         const indexOfGivenId = jsonCharactersId.indexOf(characterToUpdateId);
         readJsonDataParsedInsideAnArray.splice(indexOfGivenId, 1, updatedCharacterParsed);
-        createFunctions.clearJSON();
+        clearJSON();
         const sendArrayBackAsJson = JSON.stringify([...readJsonDataParsedInsideAnArray], null, 2);
-        createFunctions.write(sendArrayBackAsJson);
+        write(sendArrayBackAsJson);
     } else {
         console.log("Unexpected error.")
     }
