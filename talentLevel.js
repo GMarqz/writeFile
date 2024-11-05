@@ -8,7 +8,8 @@ const levels = [
     4,
     6,
     12,
-    16
+    16,
+    "This talent is crowned."
 ]
 
 function calcTalentMaterialsForSpecificLevel(currentLevel, specificLevel) {
@@ -26,20 +27,39 @@ function calcTalentMaterialsForSpecificLevel(currentLevel, specificLevel) {
     console.log(`You need ${clevel} materials to get to your desired level.`);
     console.log(levels[9]);
     // console.log(slevel);
+    levels.forEach((level) => {
+        if(level >= currentLevel) {
+
+        }
+    })
+
+    for(let i = currentLevel; levels[i] >= currentLevel; i++) {
+
+    }
 }
 
-calcTalentMaterialsForSpecificLevel(6, 9);
+// calcTalentMaterialsForSpecificLevel(6, 9);
 // console.log(levels[6] + 1)
 
 function identifyRarity(talentLevel) {
     if(talentLevel === 1) {
         return "teachings";
-    } else if(talentLevel >= 2 && talentLevel <= 6) {
+    } else if(talentLevel >= 2 && talentLevel <= 5) {
         return "guide";
-    } else if(talentLevel >= 7 && talentLevel <= 10) {
+    } else if(talentLevel >= 6 && talentLevel <= 10) {
         return "philosophies";
     } else {
         return "invalid level";
+    }
+}
+
+function talentMessage(talent, talentLevel, talentIndex, talentRarity, talentType) {
+    if(talentLevel <= 9) {
+        return `${talentIndex} ${talentRarity} of ${talentType} to upgrade its ${talent} to the next level.`
+    } else if(talentLevel === 10) {
+        return `${talent} is already crowned`
+    } else {
+        console.log("Undexpected error");
     }
 }
 
@@ -55,9 +75,9 @@ function identifyLevel(normalAtkParamms, elementalSkillParamms, elementalBurstPa
 
     console.log(`
         This character needs:
-        \n ${normalAtkLevelIndex} ${normalAtkRarity} of ${talentType} to upgrade its Normal Attack to the next level.
-        \n ${elementalSkillIndex} ${elementalSkillRarity} of ${talentType} to upgrade its Elemental Skill to the next level.
-        \n ${elementalBurstIndex} ${elementalBurstRarity} of ${talentType} to upgrade its Elemental Burst to the next level.
+        \n ${talentMessage('Normal Atack', normalAtkParamms, normalAtkLevelIndex, normalAtkRarity, talentType)}
+        \n ${talentMessage('Elemental Skill', elementalSkillParamms, elementalSkillIndex, elementalSkillRarity, talentType)}
+        \n ${talentMessage('Elemental Burst', elementalBurstParamms, elementalBurstIndex, elementalBurstRarity, talentType)}.
     `);
 }
 
