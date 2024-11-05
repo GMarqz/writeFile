@@ -1,4 +1,4 @@
-import { select, Separator, input } from '@inquirer/prompts';
+import { select, input } from '@inquirer/prompts';
 import userInput from './userInput.js';
 import * as readFunctions from './read.js';
 import askNewDataInfo from './update.js';
@@ -22,10 +22,8 @@ console.log(`
 
 async function initApp() {
 
-    console.log('\n\nWelcome to Genshin Talent Check, what would you like to do today? \n')
-
     const mainMenu = await select({
-        message: 'Select a package manager',
+        message: '\n\nWelcome to Genshin Talent Check, what would you like to do today? \n',
         choices: [
           {
             name: 'Add a character',
