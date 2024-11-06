@@ -1,6 +1,6 @@
 const addDataToJson = require('./create');
 const idGenerator = require('./idGenerator');
-const { isThisTalentLevelValid } = require('./handleErrors/userInput');
+const { isThisTalentLevelValid, isThisTalentTypeValid } = require('./handleErrors/userInput');
 
 async function userInput(rl) {
     const id = idGenerator.idGenerator();
@@ -9,7 +9,7 @@ async function userInput(rl) {
     const characterNormalAtk = await isThisTalentLevelValid(rl, characterName, 'normal attack');
     const characterElementalSkill = await isThisTalentLevelValid(rl, characterName, 'elemental skill');
     const characterElementalBurst = await isThisTalentLevelValid(rl, characterName, 'elemental burst');
-    const characterTalentType = await rl.question(`${characterName}'s talent type: `);
+    const characterTalentType = await isThisTalentTypeValid(rl, characterName);
     const characterWeeklyBossMaterial = await rl.question(`${characterName}'s weekly boss material: `);
     const characterPic = await rl.question(`${characterName}'s pic is nested at: `);
     const characterDescription = await rl.question(`Add a description to ${characterName}'s profile: `);
