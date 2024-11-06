@@ -16,6 +16,23 @@ async function isThisTalentLevelValid(rl, characterName, talent) {
     return getCharacterTalentLevel;
 }
 
+async function isThisTalentTypeValid(rl, characterName) {
+    const talentType = ['Freedom', 'Resistance', 'Ballad', 'Prosperity', 'Diligence', 'Gold', 'Transience', 'Elegance', 'Light', 'Admonition', 'Ingenuity', 'Praxis', 'Equity', 'Order', 'Justice', 'Contention', 'Kindling', 'Conflict'];
+
+    let isValid = false;
+    let getCharacterTalentType;
+    while(isValid == false) {
+        getCharacterTalentType = await rl.question(`${characterName}'s talent type: `);
+        if(!talentType.includes(getCharacterTalentType)) {
+            console.log(`\nERROR: Please, enter one of the talent type below:\n${talentType}\n`);
+        } else if(talentType.includes(getCharacterTalentType)) {
+            break;
+        }
+    }
+    return getCharacterTalentType;
+}
+
 module.exports = {
-    isThisTalentLevelValid: isThisTalentLevelValid
+    isThisTalentLevelValid: isThisTalentLevelValid,
+    isThisTalentTypeValid: isThisTalentTypeValid
 }
