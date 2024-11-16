@@ -6,6 +6,7 @@ async function askNewDataInfo(character, rl) {
     const updatedNormalAtkLevel = await rl.question(`Enter the character's new Normal Attack Level ${oldLevelMessage}: `);
     const updatedElementalSkillLevel = await rl.question(`Enter the character's new Elemental Skill Level ${oldLevelMessage}: `);
     const updatedElementalBurstLevel = await rl.question(`Enter the character's new Elemental Burst Level ${oldLevelMessage}: `);
+    const updatedRegion = await rl.question(`Enter the character's new region: `)
     const updatedDescription = await rl.question(`Enter the character's new Description: `);
 
     const updatedCharacter = `
@@ -19,6 +20,7 @@ async function askNewDataInfo(character, rl) {
                 "type": "${character.talents.type}",
                 "weeklyBossMaterial": "${character.talents.weeklyBossMaterial}"
             },
+            "region": "${updatedRegion}",
             "pic": "${character.pic}",
             "description": "${updatedDescription}"
         }
