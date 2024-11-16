@@ -10,36 +10,45 @@ const levels = [
     12,
     16,
     "This talent is crowned."
-]
+];
+
+//Ask the user: Whats the maximum level you wanna invest for this talent?
+// currentLevel + nextLevels until maximumLevel.
 
 function calcTalentMaterialsForSpecificLevel(currentLevel, specificLevel) {
 
-    let clevel = levels[currentLevel];
-    const slevel = levels[specificLevel];
-    // let nextClevelIndex;
-    let result = 0;
-    // while(clevel <= slevel) {
-    //     nextClevelIndex = currentLevel + 1;
-    //     clevel = clevel + levels[nextClevelIndex];
-    //     nextClevelIndex++;
-    //     clevel++;
-    // }
-    console.log(`You need ${clevel} materials to get to your desired level.`);
-    console.log(levels[9]);
-    // console.log(slevel);
-    levels.forEach((level) => {
-        if(level >= currentLevel) {
+    const talentLevels = [
+        0,
+        0,
+        3,
+        2,
+        4,
+        6,
+        9,
+        4,
+        6,
+        12,
+        16
+    ];
 
-        }
-    })
+    let allGivenLevels = [];
+    let sum = 0;
 
-    for(let i = currentLevel; levels[i] >= currentLevel; i++) {
+    while(currentLevel <= specificLevel){
+        let clevel = talentLevels[currentLevel];
+        allGivenLevels.push(clevel);
+        currentLevel++;
+        console.log(currentLevel);
+        console.log(allGivenLevels);
+    }
 
+    for(let i = 0; i < allGivenLevels.length; i++) {
+        sum += allGivenLevels[i];
+        console.log(sum)
     }
 }
 
-// calcTalentMaterialsForSpecificLevel(6, 9);
-// console.log(levels[6] + 1)
+calcTalentMaterialsForSpecificLevel(6, 9);
 
 function identifyRarity(talentLevel) {
     if(talentLevel === 1) {
@@ -67,6 +76,7 @@ function identifyLevel(normalAtkParamms, elementalSkillParamms, elementalBurstPa
     const normalAtkLevelIndex = levels[normalAtkParamms];
     const elementalSkillIndex = levels[elementalSkillParamms];
     const elementalBurstIndex = levels[elementalBurstParamms];
+
     const talentType = talentTypeParamms;
 
     const normalAtkRarity = identifyRarity(normalAtkParamms);
@@ -75,7 +85,7 @@ function identifyLevel(normalAtkParamms, elementalSkillParamms, elementalBurstPa
 
     console.log(`
         This character needs:
-        \n ${talentMessage('Normal Atack', normalAtkParamms, normalAtkLevelIndex, normalAtkRarity, talentType)}
+        \n ${talentMessage('Normal Attack', normalAtkParamms, normalAtkLevelIndex, normalAtkRarity, talentType)}
         \n ${talentMessage('Elemental Skill', elementalSkillParamms, elementalSkillIndex, elementalSkillRarity, talentType)}
         \n ${talentMessage('Elemental Burst', elementalBurstParamms, elementalBurstIndex, elementalBurstRarity, talentType)}.
     `);
