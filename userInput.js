@@ -11,6 +11,7 @@ async function userInput(rl) {
     const characterElementalBurst = await isThisTalentLevelValid(rl, characterName, 'elemental burst');
     const characterTalentType = await isThisTalentTypeValid(rl, characterName);
     const characterWeeklyBossMaterial = await rl.question(`${characterName}'s weekly boss material: `);
+    const characterRegion = await rl.question(`${characterName}'s region: `)
     const characterPic = await rl.question(`${characterName}'s pic is nested at: `);
     const characterDescription = await rl.question(`Add a description to ${characterName}'s profile: `);
 
@@ -26,6 +27,7 @@ async function userInput(rl) {
                 "type": "${characterTalentType}",
                 "weeklyBossMaterial": "${characterWeeklyBossMaterial}"
             },
+            "region": "${characterRegion}",
             "pic": "${characterPic}",
             "description": "${characterDescription}"
         }
