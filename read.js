@@ -1,6 +1,7 @@
 const fs = require('fs');
 const { returnAllCharactersWithThisTalentType } = require('./talentType');
 const { predictNecessaryMaterials, calcTalentMaterialsForSpecificLevel } = require('./talentLevel');
+const { getUserInputThenCalcTalentMaterialsForSpecificLevel } = require('./talentLevelInput');
 
 function readAll(consoleLogOrNot){
     const dataRead = fs.readFileSync('./characters.json', 'utf8');
@@ -41,9 +42,12 @@ async function read(rl, data) {
     await returnAllCharactersWithThisTalentType(rl, charactersData);
   } else if(chooseReadOption === '4'){
     const chooseCharacterAndCalcMats = await getCharacterName(rl, data);
-    calcTalentMaterialsForSpecificLevel(chooseCharacterAndCalcMats.talents.normalAtk, 9, chooseCharacterAndCalcMats.talents.type, 'Normal Attack');
-    calcTalentMaterialsForSpecificLevel(chooseCharacterAndCalcMats.talents.elementalSkill, 9, chooseCharacterAndCalcMats.talents.type, 'Elemental Skill');
-    calcTalentMaterialsForSpecificLevel(chooseCharacterAndCalcMats.talents.elementalBurst, 9, chooseCharacterAndCalcMats.talents.type, 'Elemental Burst');
+
+    getUserInputThenCalcTalentMaterialsForSpecificLevel(rl, chooseCharacterAndCalcMats);
+
+    // const calcNormalAtkMats = calcTalentMaterialsForSpecificLevel(chooseCharacterAndCalcMats.talents.normalAtk, 10, chooseCharacterAndCalcMats.talents.type, 'Normal Attack');
+    // const calcElementalSkillMats = calcTalentMaterialsForSpecificLevel(chooseCharacterAndCalcMats.talents.elementalSkill, 10, chooseCharacterAndCalcMats.talents.type, 'Elemental Skill');
+    // const calcElementalBurstMats = calcTalentMaterialsForSpecificLevel(chooseCharacterAndCalcMats.talents.elementalBurst, 10, chooseCharacterAndCalcMats.talents.type, 'Elemental Burst');
   } else {
     console.log('Invalid option. Please type an option between 1 and 3')
     rl.close();
