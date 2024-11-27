@@ -1,6 +1,6 @@
 const readline = require('node:readline/promises');
-const characters = require('./characters.json');
-const { read, getCharacterName } = require('./read');
+const { read, getCharacterName, PATH } = require('./read');
+const characters = require(PATH);
 const userInput = require('./userInput');
 const askNewDataInfo = require('./update');
 const { removeById } = require('./delete');
@@ -26,7 +26,6 @@ console.log(`
 ░╚════╝░╚═╝░░╚═╝╚══════╝░╚════╝░╚═╝░░╚═╝`);
 
 async function initApp() {
-
     const mainMenu = await rl.question('\n\nWelcome to Genshin Talent Check, what would you like to do today? \n[1] - Add a character \n[2] - Check characters talents \n[3] - Update a character info \n[4] - Delete a character \n[5] - Quit \n(Select the number that matches your desired option): ');
 
     if(mainMenu === '1'){
@@ -34,7 +33,6 @@ async function initApp() {
     } else if (mainMenu === '2') {
         console.log('Reading...');
         await read(rl, characters);
-        // rl.close();
         initApp();
     } else if(mainMenu === '3') {
         console.log('Updating...');
@@ -49,7 +47,7 @@ async function initApp() {
         console.log('Leaving...');
         rl.close();
     } else {
-        console.log('\n \nSorry, this option is invalid, restarting program.');
+        console.log('\n \nSorry, this option is invalid. Please choose and option between 1 and 5. Restarting program.');
         initApp();
     }
 }
