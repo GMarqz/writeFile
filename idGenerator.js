@@ -1,4 +1,5 @@
-const characters = require('./characters.json');
+const { PATH } = require('./read');
+const characters = require(PATH);
 
 function idGenerator() {
     let existingId = [];
