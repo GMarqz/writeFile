@@ -35,20 +35,23 @@ function calcTalentMaterialsForSpecificLevel(currentLevel, specificLevel, talent
     let philosophiesLevels = [];
     let sumGuide = 0;
     let sumPhilo = 0;
+    let initialLevel = currentLevel;
+    talentLevels.splice(initialLevel, 1);
 
     while(currentLevel <= 2) {
         currentLevel++;
         // console.log('You need 3 teachings');
     }
 
-    while(currentLevel <= specificLevel && currentLevel >= 3 && currentLevel <= 6){
+    while(currentLevel <= specificLevel && currentLevel >= 3 && currentLevel < 6){
         let guideLevel = talentLevels[currentLevel];
         guideLevels.push(guideLevel);
         currentLevel++;
         // console.log(guideLevels + ' \nEste foi o guide levels')
     }
 
-    while(currentLevel >= 7 && currentLevel <= specificLevel) {
+    while(currentLevel >= 6 && currentLevel < specificLevel) {
+        // currentLevel++;
         let philosophiesLevel = talentLevels[currentLevel];
         philosophiesLevels.push(philosophiesLevel);
         currentLevel++;
@@ -57,8 +60,8 @@ function calcTalentMaterialsForSpecificLevel(currentLevel, specificLevel, talent
 
     for(let i = 0; i < guideLevels.length; i++) {
         sumGuide += guideLevels[i];
-        // console.log(sumGuide + 'esta é a soma do guide')
     }
+
     for(let i = 0; i < philosophiesLevels.length; i++) {
         sumPhilo += philosophiesLevels[i];
         // console.log(sumPhilo + 'esta é a soma do philo')
