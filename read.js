@@ -1,10 +1,11 @@
 const fs = require('fs');
+const PATH = '../../characters.json';
 const { returnAllCharactersWithThisTalentType } = require('./talentType');
 const { predictNecessaryMaterials, calcTalentMaterialsForSpecificLevel } = require('./talentLevel');
 const { getUserInputThenCalcTalentMaterialsForSpecificLevel } = require('./talentLevelInput');
 
 function readAll(consoleLogOrNot){
-    const dataRead = fs.readFileSync('./characters.json', 'utf8');
+    const dataRead = fs.readFileSync(PATH, 'utf8');
     const readDataParsed = JSON.parse(dataRead);
     const readDataParsedArray = [...readDataParsed];
     if(consoleLogOrNot === true) {
@@ -57,5 +58,6 @@ async function read(rl, data) {
 module.exports = {
   read: read,
   getCharacterName: getCharacterName,
-  readAll: readAll
+  readAll: readAll,
+  PATH
 }
