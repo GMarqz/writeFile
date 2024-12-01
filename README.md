@@ -9,4 +9,9 @@ Users should be able to:
   - List characters by talent type
   - Predict the amount of materials to upgrade character's talent level
 
+## How to use it
+
+Download repo or clone it.
+Open the downloaded folder via command line and enter ```npm run dev```
+
 Working clean!

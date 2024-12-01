@@ -1,14 +1,9 @@
-const readline = require('node:readline/promises');
-const characters = require('./characters.json');
-const { read, getCharacterName } = require('./read');
-const userInput = require('./userInput');
-const askNewDataInfo = require('./update');
-const { removeById } = require('./delete');
+import { select, Separator, input } from '../node_modules/@inquirer/prompts/dist/commonjs/index.js';
+import userInput from './userInput.js';
+import * as readFunctions from './read.js';
+import askNewDataInfo from './update.js';
+import removeByName from './delete.js';
 
-const rl = readline.createInterface({
-    input: process.stdin,
-    output: process.stdout,
-});
 //fsymbols.com for cool fonts like the one below.
 console.log(`
 ░██████╗░███████╗███╗░░██╗░██████╗██╗░░██╗██╗███╗░░██╗  ████████╗░█████╗░██╗░░░░░███████╗███╗░░██╗████████╗
@@ -27,27 +22,56 @@ console.log(`
 
 async function initApp() {
 
-    const mainMenu = await rl.question('\n\nWelcome to Genshin Talent Check, what would you like to do today? \n[1] - Add a character \n[2] - Check characters talents \n[3] - Update a character info \n[4] - Delete a character \n[5] - Quit \n(Select the number that matches your desired option): ');
+    console.log('\n\nWelcome to Genshin Talent Check, what would you like to do today? \n')
+
+    const mainMenu = await select({
+        message: 'Select a package manager',
+        choices: [
+          {
+            name: 'Add a character',
+            value: '1',
+            description: 'Add a character',
+          },
+          {
+            name: 'Check characters talents',
+            value: '2',
+            description: 'Check characters talents',
+          },
+          {
+            name: 'Update a character info',
+            value: '3',
+            description: 'Update a character info',
+          },
+          {
+            name: 'Delete a character',
+            value: '4',
+            description: 'Delete a character',
+          },
+            {
+            name: 'Quit',
+            value: '5',
+            description: 'Quit',
+          },
+        ],
+    });
 
     if(mainMenu === '1'){
-        const firstOption = userInput.userInput(rl);
+        userInput();
     } else if (mainMenu === '2') {
         console.log('Reading...');
-        await read(rl, characters);
-        // rl.close();
+        await readFunctions.read();
         initApp();
     } else if(mainMenu === '3') {
         console.log('Updating...');
-        const toUpdateCharacter = await getCharacterName(rl, characters);
-        askNewDataInfo.askNewDataInfo(toUpdateCharacter, rl);
+        const toUpdateCharacter = await readFunctions.getCharacterName(readFunctions.readAll(false));
+        askNewDataInfo(toUpdateCharacter);
     } else if(mainMenu === '4') {
         console.log('Deleting...') ;
-        const toDeleteId = await rl.question("Please enter your character's id: ");
-        removeById(Number(toDeleteId));
-        rl.close();
+        const toDeleteName = await input({ message: "Please enter your character's name: "});
+        removeByName(toDeleteName);
     } else if (mainMenu === '5') {
         console.log('Leaving...');
-        rl.close();
+        process.exit();
     } else {
         console.log('\n \nSorry, this option is invalid, restarting program.');
         initApp();

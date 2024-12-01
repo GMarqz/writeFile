@@ -1,22 +1,24 @@
 {
-  "devDependencies": {
-    "@types/node": "^22.9.0",
-    "typescript": "^5.6.3"
-  },
-  "name": "writefiletypescript",
-  "description": "Users should be able to:\r   - Add  their own characters to database\r   - Check characters and their talent levels\r   - Check characters' talent's weekly boss materials\r   - Update information about the characters\r   - Delete characters\r   - List characters by talent type\r   - Predict the amount of materials to upgrade character's talent level",
+  "name": "gi-talent-check",
   "version": "2.0.0",
-  "main": "arrayMethods.js",
-  "dependencies": {
-    "concurrently": "^9.1.0",
-    "undici-types": "^6.21.0"
-  },
+  "description": "A program that is able to check your character talent level",
+  "main": "app.js",
+  "type": "commonjs",
   "scripts": {
-    "compile": "tsc -w",
-    "start": "concurrently \"command1 arg\" \"command2 arg\"",
+    "compile": "npx tsc ./app/app.ts",
+    "dev": "node ./app/app.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "keywords": [],
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "@inquirer/prompts": "^7.0.1",
+    "@types/node": "^22.10.1",
+    "@types/uuid": "^10.0.0",
+    "undici-types": "^7.0.0",
+    "uuid": "^11.0.3"
+  },
+  "devDependencies": {
+    "typescript": "^5.7.2"
+  }
 }

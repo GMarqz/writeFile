@@ -1,26 +1,24 @@
-const { clearJSON, write } = require('./create');
-const { readAll } = require('./read');
+import * as createFuntions from './create.js';
+import * as readFunctions from './read.js';
 
-function removeById(id) {
-    const readArray = readAll(false);
+export default function removeByName(characterName) {
+    const readArray = readFunctions.readAll(false);
 
-    let charactersId = [];
+    let charactersName = [];
     for(let i = 0; i < readArray.length; i++) {
-        charactersId.push(readArray[i].id);
+        charactersName.push(readArray[i].name);
     }
     
-    if(charactersId.includes(id)) {
-        const indexOfGivenId = charactersId.indexOf(id);
-        readArray.splice(indexOfGivenId, 1);
-        console.log(`${id} posicionado no index >${indexOfGivenId}< foi removido com sucesso!`);
-        clearJSON();
+    // Dont forget to add a function asking if the user is sure about deleting the character, later.
+
+    if(charactersName.includes(characterName)) {
+        const indexOfGivenName = charactersName.indexOf(characterName);
+        readArray.splice(indexOfGivenName, 1);
+        console.log(`${characterName} posicionado no index >${indexOfGivenName}< foi removido com sucesso!`);
+        createFuntions.clearJSON();
         const returnArrayAsJson = JSON.stringify([...readArray], null, 2);
-        write(returnArrayAsJson);
+        createFuntions.write(returnArrayAsJson);
     } else {
         console.log("Unexpected error.")
     }
 } 
-
-module.exports = {
-    removeById: removeById
-}
