@@ -2,7 +2,7 @@ const fs = require('fs');
 const { returnAllCharactersWithThisTalentType } = require('./talentType');
 const { predictNecessaryMaterials } = require('./talentLevel');
 
-function readAll(consoleLogOrNot){
+export function readAll(consoleLogOrNot){
     const dataRead = fs.readFileSync('./characters.json', 'utf8');
     const readDataParsed = JSON.parse(dataRead);
     const readDataParsedArray = [...readDataParsed];
@@ -15,18 +15,18 @@ function readAll(consoleLogOrNot){
     }
 }
 
-function readByName(data, value) {
+export function readByName(data, value) {
     return data.find((character) => character['name'] === value);
 }
 
-async function getCharacterName(rl, data) {
+export async function getCharacterName(rl, data) {
   const provideCharacterName = await rl.question(`Enter the characters name: `);
   const characterFound = readByName(data, provideCharacterName);
   console.log(characterFound);
   return characterFound;
 }
 
-async function read(rl, data) {
+export async function read(rl, data) {
 
   const chooseReadOption = await rl.question(`Choose an option below: \n[1] - See all characters data \n[2] - See character data by name \n[3] - See characters by talent type \n`);
 
@@ -45,8 +45,8 @@ async function read(rl, data) {
   }
 }
 
-module.exports = {
-  read: read,
-  getCharacterName: getCharacterName,
-  readAll: readAll
-}
+// module.exports = {
+//   read: read,
+//   getCharacterName: getCharacterName,
+//   readAll: readAll
+// }

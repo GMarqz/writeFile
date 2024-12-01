@@ -1,6 +1,6 @@
 const addDataToJson = require('./create');
 const idGenerator = require('./idGenerator');
-const { isThisTalentLevelValid, isThisTalentTypeValid } = require('./handleErrors/userInput');
+const { isThisTalentLevelValid, isThisTalentTypeValid } = require('./app/handleErrors/userInput');
 
 async function userInput(rl) {
     const id = idGenerator.idGenerator();
