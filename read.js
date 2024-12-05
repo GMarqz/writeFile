@@ -1,9 +1,16 @@
 import fs from 'node:fs';
 import { select, Separator, input } from '@inquirer/prompts';
 import returnAllCharactersWithThisTalentType from './talentType.js';
+import { calcTalentMaterialsForSpecificLevel, predictNecessaryMaterials } from './talentLevel.js';
+
+export const PATH = '../../PROJETOS PESSOAIS/characters.json';
+
+// Deixar o PATH vazio no github. SE o PATH for uma string vazia, criar o arquivo 'characters.json'
+// Com o arquivo characters.json criado, PATH passa a ser o caminho do 'banco de dados'
+// Não sei bem como fazer isso, mas talvez deixando a const 'path' em um arquivo txt e editá-lo após 'characters.json' for criado?
 
 function readAll(consoleLogOrNot){  
-    const dataRead = fs.readFileSync('./characters.json', 'utf8');
+    const dataRead = fs.readFileSync(PATH, 'utf8');
     const readDataParsed = JSON.parse(dataRead);
     const readDataParsedArray = [...readDataParsed];
     if(consoleLogOrNot === true) {
@@ -46,22 +53,28 @@ async function read() {
         value: 'third',
         description: 'Check characters by talent type',
       },
-      new Separator(),
       {
-        name: 'fourth',
+        name: 'Calculate amount of materials for specific level',
         value: 'fourth',
-        disabled: 'Check characters by weekly boos material (coming soon)',
+        // disabled: 'Check characters by weekly boos material (coming soon)',
+        description: "You can calculate how many materials you need for the next level, max level or whatever the level you want to check.",
       },
     ],
+      // new Separator(),
+ 
   });
 
   if (chooseReadOption === 'first') {
     readAll(true)
   } else if (chooseReadOption === 'second') {
-    await getCharacterName(readAll(false));
+    const chosenCharacter = await getCharacterName(readAll(false));
+    predictNecessaryMaterials(chosenCharacter);
   } else if (chooseReadOption === 'third') {
     // const charactersData = readAll(false);
     await returnAllCharactersWithThisTalentType(input, readAll(false));
+  } else if(chooseReadOption === 'fourth') {
+    const chosenCharacterToCalc = await getCharacterName(readAll(false));
+    calcTalentMaterialsForSpecificLevel(chosenCharacterToCalc.talents.normalAtk, 10, chosenCharacterToCalc.talents.type, "Normal Attack");
   } else {
     console.log('Invalid option. Please type an option between 1 and 3')
   }
