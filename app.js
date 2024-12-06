@@ -1,8 +1,11 @@
-import { select, Separator, input } from '@inquirer/prompts';
+import { select, input } from '@inquirer/prompts';
 import userInput from './userInput.js';
 import * as readFunctions from './read.js';
 import askNewDataInfo from './update.js';
 import removeByName from './delete.js';
+import userValidator from './arrayMethods.js';
+
+export let PATH = userValidator();
 
 //fsymbols.com for cool fonts like the one below.
 console.log(`
@@ -22,10 +25,8 @@ console.log(`
 
 async function initApp() {
 
-    console.log('\n\nWelcome to Genshin Talent Check, what would you like to do today? \n')
-
     const mainMenu = await select({
-        message: 'Select a package manager',
+        message: '\n\nWelcome to Genshin Talent Check, what would you like to do today? \n',
         choices: [
           {
             name: 'Add a character',
@@ -63,7 +64,7 @@ async function initApp() {
         initApp();
     } else if(mainMenu === '3') {
         console.log('Updating...');
-        const toUpdateCharacter = await readFunctions.getCharacterName(readFunctions.readAll(false));
+        const toUpdateCharacter = await readFunctions.getCharacterName(readFunctions.readAll(false, PATH));
         askNewDataInfo(toUpdateCharacter);
     } else if(mainMenu === '4') {
         console.log('Deleting...') ;

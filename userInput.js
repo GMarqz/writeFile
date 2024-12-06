@@ -2,9 +2,10 @@ import * as createFuntions from './create.js';
 import * as readFunctions from './read.js';
 import { input } from '@inquirer/prompts';
 import { v4 as uuidv4 } from 'uuid';
+import { PATH } from './app.js';
 
 async function createNameIfItDoesntExist() {
-    const readArray = readFunctions.readAll(false);
+    const readArray = readFunctions.readAll(false, PATH);
     const checkCharacterName = await input({ message: 'Characters name: '});
 
     let charactersName = [];
