@@ -1,8 +1,9 @@
 import { clearJSON, write } from './create.js';
 import { readAll } from './read.js';
+import { PATH } from './app.js';
 
 export default function removeByName(characterName) {
-    const readArray = readAll(false);
+    const readArray = readAll(false, PATH);
 
     let charactersName = [];
     for(let i = 0; i < readArray.length; i++) {
@@ -15,9 +16,9 @@ export default function removeByName(characterName) {
         const indexOfGivenName = charactersName.indexOf(characterName);
         readArray.splice(indexOfGivenName, 1);
         console.log(`${characterName} posicionado no index >${indexOfGivenName}< foi removido com sucesso!`);
-        clearJSON();
+        clearJSON(PATH);
         const returnArrayAsJson = JSON.stringify([...readArray], null, 2);
-        write(returnArrayAsJson);
+        write(returnArrayAsJson, PATH);
     } else {
         console.log("Unexpected error.")
     }

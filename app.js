@@ -3,6 +3,9 @@ import userInput from './userInput.js';
 import * as readFunctions from './read.js';
 import askNewDataInfo from './update.js';
 import removeByName from './delete.js';
+import userValidator from './arrayMethods.js';
+
+export let PATH = userValidator();
 
 //fsymbols.com for cool fonts like the one below.
 console.log(`
@@ -61,7 +64,7 @@ async function initApp() {
         initApp();
     } else if(mainMenu === '3') {
         console.log('Updating...');
-        const toUpdateCharacter = await readFunctions.getCharacterName(readFunctions.readAll(false));
+        const toUpdateCharacter = await readFunctions.getCharacterName(readFunctions.readAll(false, PATH));
         askNewDataInfo(toUpdateCharacter);
     } else if(mainMenu === '4') {
         console.log('Deleting...') ;

@@ -1,7 +1,12 @@
-const characters = require('./characters.json');
+import { readAll } from './read.js';
 
-// function readByName(data, key, value) {
-//     return data.find((character) => character[key] === valor);
-// }
-
-// const characterFound = readByName();
+function userValidator() {
+    const data = readAll(false, './config.json')
+    if(data[0].author === "true") {
+        return '../characters.json';
+    } else if(data[0].author === "false") {
+        return data[0].userDbPath;
+    }
+}
+  
+  export default userValidator;
